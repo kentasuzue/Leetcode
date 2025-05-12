@@ -1,0 +1,16 @@
+class Solution:
+    
+    import itertools
+    
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        
+        digits = list(range(1,10))
+        combos = itertools.combinations(digits, k)
+        
+        answers = []
+        for combo in combos:
+            if sum(combo) == n:
+                answers.append(combo)
+                
+        return answers
+        

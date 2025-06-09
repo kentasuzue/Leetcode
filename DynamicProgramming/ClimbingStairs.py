@@ -28,51 +28,54 @@ Constraints:
 """
 class Solution:
     def climbStairs(self, n: int) -> int:
+        """
         # solution A iterative alternative to dynamic programming
-        # stairs = [0] * (n + 1)
-        # stairs[0] = 1
-        # for i in range(n + 1):
-            # if i + 1 <= n:
-                # stairs[i + 1] += stairs[i]
-            # if i + 2 <= n:
-                # stairs[i + 2] += stairs[i]                
-        # return stairs[n]
+        stairs = [0] * (n + 1)
+        stairs[0] = 1
+        for i in range(n + 1):
+            if i + 1 <= n:
+                stairs[i + 1] += stairs[i]
+            if i + 2 <= n:
+                stairs[i + 2] += stairs[i]                
+        return stairs[n]
         
         # solution B that removes if conditions in solution A 
-        # stairs = [0] * (n + 3)
-        # stairs[0] = 1
-        # for i in range(n + 1):
-            # stairs[i + 1] += stairs[i]
-            # stairs[i + 2] += stairs[i]                
-        # return stairs[n]
+        stairs = [0] * (n + 3)
+        stairs[0] = 1
+        for i in range(n + 1):
+            stairs[i + 1] += stairs[i]
+            stairs[i + 2] += stairs[i]                
+        return stairs[n]
 
         # solution C that stores only 3 integers
-        # stair0 = 1
-        # stair1 = 0
-        # stair2 = 0
-        # for i in range(n):
-            # stair1 += stair0
-            # stair2 += stair0
+        stair0 = 1
+        stair1 = 0
+        stair2 = 0
+        for i in range(n):
+            stair1 += stair0
+            stair2 += stair0
             # print("a", stair0, stair1, stair2)
-            # stair0 = stair1
-            # stair1 = stair2
-            # stair2 = 0
+            stair0 = stair1
+            stair1 = stair2
+            stair2 = 0
             # print("b", stair0, stair1, stair2)
-        # return stair0
+        return stair0
         
-        # solution D that uses dymamic programming but without Python cache
-        # def dp(stairs):
-            # if ways[stairs] != 0:
-                # return ways[stairs]
-            # else:
-                # ways[stairs] = dp(stairs - 1) + dp(stairs - 2)
-                # return ways[stairs]
-        # ways = [0] * (n+1)
-        # ways[0] = 1
-        # ways[1] = 1        
-        # dp(n)
-        # return ways[n]
+        # solution D that uses dymamic programming but without Python @cache decorator
+        def dp(stairs):
+            if ways[stairs] != 0:
+                return ways[stairs]
+            else:
+                ways[stairs] = dp(stairs - 1) + dp(stairs - 2)
+                return ways[stairs]
+        ways = [0] * (n+1)
+        ways[0] = 1
+        ways[1] = 1        
+        dp(n)
+        return ways[n]
+        """
 
+       # solution E that uses dynamic programming with Python @cache decorator
         @cache
         def dp(stairs: int):
             if stairs == 0:

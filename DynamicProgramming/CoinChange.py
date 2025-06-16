@@ -29,7 +29,8 @@ Constraints:
 # dynamic programming with @cache decorator
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
-        coins_sorted = sorted(coins, reverse=True)
+        coins_set = set(coins)
+        coins_sorted = sorted(coins_set, reverse=True)
         
         @cache
         def dp(amount_left) -> int:

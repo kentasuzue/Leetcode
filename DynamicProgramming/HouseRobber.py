@@ -21,6 +21,7 @@ Constraints:
 0 <= nums[i] <= 400
 """
 
+"""
 class Solution:
     def rob(self, nums: List[int]) -> int:
         
@@ -37,3 +38,27 @@ class Solution:
             return max(dp_rob(n - 1), dp_safe(n - 1))
 
         return max(dp_rob(len(nums) - 1), dp_safe(len(nums) - 1))
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        
+        rob = [0] * len(nums)
+        safe = [0] * len(nums)
+
+        rob[0] = nums[0]
+
+        for house in range(1, len(nums)):
+            rob[house] = nums[house] + safe[house - 1]
+            safe[house] = max(rob[house - 1], safe[house - 1])
+
+        return max(rob[len(nums) - 1], safe[len(nums) - 1])
+"""
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        rob = nums[0]
+        safe = 0
+
+        for house in range(1, len(nums)):
+            rob, safe = nums[house] + safe, max(rob, safe)
+        
+        return max(rob, safe)
